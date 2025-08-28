@@ -1,0 +1,94 @@
+﻿<Window x:Class="SkolaProgramiranja.Views.UrediInstruktorProfilView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Uredi profil" Height="600" Width="450" WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource MaterialDesignPaper}">
+    <Grid Margin="10">
+        <materialDesign:Card Margin="10" Padding="24">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+
+                    <!-- Naslov -->
+                    <TextBlock Text="{DynamicResource WindowTitle_EditProfile}"
+                               FontSize="26"
+                               FontWeight="Bold"
+                               Margin="0,0,0,25"
+                               Foreground="{DynamicResource PrimaryHueMidBrush}" />
+
+                    <!-- Ime -->
+                    <TextBox x:Name="txtIme"
+                             materialDesign:HintAssist.Hint="{DynamicResource Hint_FirstName}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Margin="0,0,0,16"/>
+
+                    <!-- Prezime -->
+                    <TextBox x:Name="txtPrezime"
+                             materialDesign:HintAssist.Hint="{DynamicResource Hint_LastName}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Margin="0,0,0,16"/>
+
+                    <!-- Email -->
+                    <TextBox x:Name="txtEmail"
+                             materialDesign:HintAssist.Hint="{DynamicResource Hint_Email}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             IsReadOnly="True"
+                             IsEnabled="False"
+                             Background="#FFEFEFEF" 
+                             Margin="0,0,0,16"/>
+
+                    <!-- Telefon -->
+                    <TextBox x:Name="txtTelefon"
+                             materialDesign:HintAssist.Hint="{DynamicResource Hint_Phone}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Margin="0,0,0,16"/>
+
+                    <!-- Obrazovanje -->
+                    <TextBox x:Name="txtObrazovanje"
+                             materialDesign:HintAssist.Hint="{DynamicResource Hint_Education}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Margin="0,0,0,16"/>
+
+                    <!-- Biografija -->
+                    <TextBox x:Name="txtBiografija"
+                             materialDesign:HintAssist.Hint="{DynamicResource Hint_Biography}"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             Height="100"
+                             VerticalScrollBarVisibility="Auto"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Margin="0,0,0,16"/>
+
+                    <!-- Slika -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20" VerticalAlignment="Center">
+                        <Border BorderBrush="{DynamicResource PrimaryHueMidBrush}" BorderThickness="1" CornerRadius="6">
+                            <Image x:Name="imgProfilna"
+                                   Width="80" Height="80"
+                                   Stretch="UniformToFill"
+                                   Margin="0"
+                                   HorizontalAlignment="Left"/>
+                        </Border>
+                        <Button Content="{DynamicResource Btn_SelectImage}"
+                                Click="OdaberiSliku_Click"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Margin="12,0,0,0"
+                                VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Dugmad -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                        <Button Content="{DynamicResource Btn_Save}"
+                                Click="Sacuvaj_Click"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Background="{DynamicResource PrimaryHueMidBrush}"
+                                Margin="0,0,10,0"/>
+
+                        <Button Content="{DynamicResource Btn_Cancel}"
+                                Click="Otkazi_Click"
+                                Style="{StaticResource MaterialDesignOutlinedButton}" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </materialDesign:Card>
+    </Grid>
+</Window>

@@ -1,0 +1,105 @@
+﻿<Window x:Class="SkolaProgramiranja.Views.EvidencijaCasaView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:SkolaProgramiranja.Views"
+        mc:Ignorable="d"
+        Title="Evidencija časa"
+        Height="600" Width="600"
+        WindowStyle="None"   
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource MaterialDesignPaper}">
+    <Grid Margin="20">
+        <materialDesign:Card Padding="24">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="10">
+
+                    <TextBlock Text="{DynamicResource Form_EvidencijaCasa_Title}"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource PrimaryHueMidBrush}"
+                               Margin="0,0,0,25" />
+
+                    <DatePicker x:Name="tbDatum"
+                                materialDesign:HintAssist.Hint="{DynamicResource Hint_DatumCasa}"
+                                SelectedDate="{x:Static sys:DateTime.Now}"
+                                Margin="0,0,0,16"/>
+
+                    <ComboBox x:Name="cbKursevi"
+                              materialDesign:HintAssist.Hint="{DynamicResource Hint_Kurs}"
+                              
+                              SelectionChanged="CbKursevi_SelectionChanged"
+                              Margin="0,0,0,16"
+                              DisplayMemberPath="Naziv"
+                              SelectedValuePath="Id" />
+
+                    <TextBox x:Name="tbTema"
+                             materialDesign:HintAssist.Hint="{DynamicResource Hint_TemaCasa}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Margin="0,0,0,16"/>
+
+                    <TextBox x:Name="tbTrajanje"
+                             materialDesign:HintAssist.Hint="{DynamicResource Hint_TrajanjeCasa}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Margin="0,0,0,16"/>
+
+                    <TextBox x:Name="tbOpis"
+                             materialDesign:HintAssist.Hint="{DynamicResource Hint_OpisAktivnosti}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             Height="100"
+                             VerticalScrollBarVisibility="Auto"
+                             Margin="0,0,0,16"/>
+<!--
+                    <TextBox x:Name="tbPrisutni"
+                             materialDesign:HintAssist.Hint="{DynamicResource Hint_PrisutniUcenici}"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             Height="100"
+                             VerticalScrollBarVisibility="Auto"
+                             Margin="0,0,0,16"/>
+-->
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,6">
+                        <TextBlock Text="{DynamicResource Hint_PrisutniUcenici}" Margin="0,0,10,0" />
+                        <CheckBox x:Name="cbSelectAll"
+                        Content="(svi)"
+                        Checked="CbSelectAll_Checked"
+                        Unchecked="CbSelectAll_Checked"/>
+                    </StackPanel>
+
+
+                    <TextBlock Text="{DynamicResource Hint_PrisutniUcenici}" Margin="0,8,0,6" />
+                    <ItemsControl x:Name="lstUcenici" Margin="0,0,0,16">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Ime}" IsChecked="{Binding Prisutan}">
+                                    
+                                </CheckBox>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="{DynamicResource Btn_Sacuvaj}"
+                                Click="Sacuvaj_Click"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Margin="0,0,10,0"
+                                Width="100"/>
+
+                        <Button Content="{DynamicResource Btn_Odustani}"
+                                Click="Odustani_Click"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Width="100"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+        </materialDesign:Card>  
+    </Grid>
+</Window>

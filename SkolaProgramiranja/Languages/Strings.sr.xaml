@@ -1,0 +1,138 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    
+                    <!--INSTRUKTOR-->
+    <sys:String x:Key="Logout">Odjava</sys:String>
+    <sys:String x:Key="EditProfile">Uredi profil</sys:String>
+    <sys:String x:Key="ViewProfile">Pregled profila</sys:String>
+    <sys:String x:Key="ChangePassword">Promijeni lozinku</sys:String>
+    <sys:String x:Key="ClassLog">Evidencija časa</sys:String>
+    <sys:String x:Key="ViewLog">Pregled evidencije</sys:String>
+    <sys:String x:Key="MyCourses">Moji kursevi</sys:String>
+    <sys:String x:Key="CourseName">Naziv</sys:String>
+    <sys:String x:Key="CourseDescription">Opis</sys:String>
+    <sys:String x:Key="Theme">Tema</sys:String>
+
+    <!--Pregled evidencije prevod-->
+    <sys:String x:Key="Btn_Filtriraj">Filtriraj</sys:String>
+    <sys:String x:Key="Btn_Odustani">Odustani</sys:String>
+    <sys:String x:Key="Tbl_Datum">Datum</sys:String>
+    <sys:String x:Key="Tbl_Kurs">Kurs</sys:String>
+    <sys:String x:Key="Tbl_Tema">Tema časa</sys:String>
+    <sys:String x:Key="Tbl_Trajanje">Trajanje (min)</sys:String>
+    <sys:String x:Key="Tbl_Akcije">Akcije</sys:String>
+    <sys:String x:Key="WindowTitle_EvidencijaCasova">Evidencija časova</sys:String>
+    <sys:String x:Key="Hint_Datum">Datum</sys:String>
+    <sys:String x:Key="Hint_Kurs">Kurs</sys:String>
+
+    <!--Evidencija casa-->
+    <sys:String x:Key="Msg_RequiredFields">Molimo popunite obavezna polja.</sys:String>
+    <sys:String x:Key="Msg_SelectCourse">Odaberite kurs.</sys:String>
+    <sys:String x:Key="Msg_SaveSuccess">Evidencija sačuvana!</sys:String>
+    <sys:String x:Key="Msg_SaveErrorTitle">Greška</sys:String>
+    <sys:String x:Key="Msg_SaveError">Greška prilikom čuvanja:</sys:String>
+    <sys:String x:Key="Msg_NotFound">Greška: evidencija nije pronađena u bazi.</sys:String>
+    <sys:String x:Key="Msg_ExportRequired">Molimo popunite obavezna polja i odaberite kurs prije eksportovanja.</sys:String>
+    <sys:String x:Key="Msg_ExportSuccess">Evidencija sačuvana kao .txt fajl!</sys:String>
+
+    <sys:String x:Key="WindowTitle_EvidencijaCasa">Evidencija časa</sys:String>
+    <sys:String x:Key="Form_EvidencijaCasa_Title">Evidencija časa</sys:String>
+    <sys:String x:Key="Hint_DatumCasa">Datum časa</sys:String>
+    <sys:String x:Key="Hint_TemaCasa">Tema časa</sys:String>
+    <sys:String x:Key="Hint_TrajanjeCasa">Trajanje (min)</sys:String>
+    <sys:String x:Key="Hint_OpisAktivnosti">Opis aktivnosti</sys:String>
+    <sys:String x:Key="Hint_PrisutniUcenici">Prisutni učenici</sys:String>
+    <sys:String x:Key="Btn_Sacuvaj">Sačuvaj</sys:String>
+    
+    <!--Promjena lozinke-->
+    <sys:String x:Key="WindowTitle_ChangePassword">Promijeni lozinku</sys:String>
+    <sys:String x:Key="Form_ChangePassword_Title">Promijeni lozinku</sys:String>
+    <sys:String x:Key="Hint_NewPassword">Nova lozinka</sys:String>
+    <sys:String x:Key="Hint_ConfirmPassword">Potvrdi lozinku</sys:String>
+    <sys:String x:Key="Btn_Save">Sačuvaj</sys:String>
+    <sys:String x:Key="Btn_Cancel">Otkaži</sys:String>
+
+    <sys:String x:Key="Msg_EmptyPasswordFields">Unesite lozinku i potvrdu.</sys:String>
+    <sys:String x:Key="Msg_PasswordTooShort">Lozinka mora imati najmanje 6 karaktera.</sys:String>
+    <sys:String x:Key="Msg_PasswordsMismatch">Lozinke se ne poklapaju!</sys:String>
+    <sys:String x:Key="Msg_PasswordChanged">Lozinka je uspješno promijenjena!</sys:String>
+
+    <!--Prikaz profila instruktora-->
+    <sys:String x:Key="WindowTitle_InstructorProfile">Profil instruktora</sys:String>
+    <sys:String x:Key="Label_Phone">Telefon:</sys:String>
+    <sys:String x:Key="Label_Education">Obrazovanje:</sys:String>
+    <sys:String x:Key="Label_Biography">Biografija:</sys:String>
+    <sys:String x:Key="Btn_Close">Zatvori</sys:String>
+    
+    <!--Uredi instruktora-->
+    <sys:String x:Key="WindowTitle_EditProfile">Uredi profil</sys:String>
+    <sys:String x:Key="Hint_FirstName">Ime</sys:String>
+    <sys:String x:Key="Hint_LastName">Prezime</sys:String>
+    <sys:String x:Key="Hint_Email">Email</sys:String>
+    <sys:String x:Key="Hint_Phone">Telefon</sys:String>
+    <sys:String x:Key="Hint_Education">Obrazovanje</sys:String>
+    <sys:String x:Key="Hint_Biography">Biografija</sys:String>
+    <sys:String x:Key="Btn_SelectImage">Odaberi sliku</sys:String>
+
+    
+                         <!--ADMIN-->
+    <sys:String x:Key="AdminPanel">Admin Panel</sys:String>
+    <sys:String x:Key="AddCourse">Dodaj kurs</sys:String>
+    <sys:String x:Key="EditCourse">Uredi kurs</sys:String>
+    <sys:String x:Key="DeleteCourse">Obriši kurs</sys:String>
+    <sys:String x:Key="AddInstructor">Dodaj instruktora</sys:String>
+    <sys:String x:Key="ViewInstructors">Pregledaj instruktore</sys:String>
+    <sys:String x:Key="CourseList">Lista kurseva</sys:String>
+    <sys:String x:Key="ColumnId">ID</sys:String>
+    <sys:String x:Key="ColumnName">Naziv</sys:String>
+    <sys:String x:Key="ColumnDescription">Opis</sys:String>
+    <sys:String x:Key="ColumnInstructor">Instruktor</sys:String>
+
+    <sys:String x:Key="CourseAdded">Kurs uspješno dodan.</sys:String>
+    <sys:String x:Key="CourseUpdated">Kurs uspješno uređen.</sys:String>
+    <sys:String x:Key="CourseDeleted">Kurs uspješno obrisan.</sys:String>
+    <sys:String x:Key="SelectCourseWarning">Niste odabrali kurs za brisanje.</sys:String>
+
+    <sys:String x:Key="Msg_ConfirmDelete">Potvrdi brisanje?</sys:String>
+    <sys:String x:Key="Msg_DeleteTitle">Brisanje</sys:String>
+
+    <!-- Ured ili dodaj kurs -->
+
+    <sys:String x:Key="AddATitle">Dodaj ili uredi kurs</sys:String>
+    <sys:String x:Key="AddTitleLabel">Naziv kursa:</sys:String>
+    <sys:String x:Key="Instructor">Instruktor:</sys:String>
+    <sys:String x:Key="CourseTitle">Kurs</sys:String>
+    
+    <!-- Pregled instruktora -->
+    <sys:String x:Key="WindowTitle_Instructors">Instruktori</sys:String>
+    <sys:String x:Key="Btn_Back">⮐ Nazad</sys:String>
+    <sys:String x:Key="Btn_Details">Detalji</sys:String>
+    
+    <!-- Uredi ili dodaj instruktora-->
+    <sys:String x:Key="WindowTitle_AddOrEditInstructor">Dodaj ili uredi instruktora</sys:String>
+    <sys:String x:Key="Form_AddOrEditInstructor_Title">Dodaj ili uredi instruktora</sys:String>
+
+    <!-- Pocetni ekran-->
+    <sys:String x:Key="Welcome">Dobrodošli u školu programiranja</sys:String>
+    <sys:String x:Key="Btn_Login">Prijavi se</sys:String>
+    <sys:String x:Key="NoData">Nema podataka.</sys:String>
+
+    
+    <!--Prijavi se-->
+    <sys:String x:Key="Login_Title">Prijava</sys:String>
+    <sys:String x:Key="Hint_Password">Lozinka</sys:String>
+
+    <!-- Poruke -->
+    <sys:String x:Key="EnterEmailAndPassword">Molimo unesite i email i lozinku.</sys:String>
+    <sys:String x:Key="Warning">Upozorenje</sys:String>
+    <sys:String x:Key="LoginSuccessful">Prijava uspješna</sys:String>
+    <sys:String x:Key="WelcomeMessage">Dobrodošli, {0} ({1})!</sys:String>
+    <sys:String x:Key="InvalidCredentials">Neispravan email ili lozinka.</sys:String>
+    <sys:String x:Key="Error">Greška</sys:String>
+    <sys:String x:Key="UnknownUserRole">Nepoznata uloga korisnika.</sys:String>
+    <sys:String x:Key="DatabaseError">Došlo je do greške prilikom pristupa bazi:&#x0a;{0}</sys:String>
+
+
+</ResourceDictionary>

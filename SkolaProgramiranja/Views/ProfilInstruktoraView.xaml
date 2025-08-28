@@ -1,0 +1,35 @@
+﻿<Window x:Class="SkolaProgramiranja.Views.ProfilInstruktoraView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Uredi profil" Height="600" Width="500" WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource MaterialDesignPaper}">
+
+    <Grid Margin="20">
+        <materialDesign:Card Padding="20">
+            <StackPanel>
+                <Image Source="{Binding SlikaProfilaPath}" 
+                       Height="100" Width="100" 
+                       Stretch="UniformToFill" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                <TextBlock x:Name="txtIme" Text="{Binding Ime}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="txtPrezime" Text="{Binding Prezime}" FontSize="18" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="txtEmail" Text="{Binding Email}" FontStyle="Italic" Foreground="Gray" HorizontalAlignment="Center" Margin="0,5"/>
+
+                <Separator Margin="0,10"/>
+
+                <TextBlock x:Name="txtTelefon" Text="Telefon:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Telefon}" Margin="0,0,0,5"/>
+
+                <TextBlock Text="Obrazovanje:" FontWeight="Bold"/>
+                <TextBlock x:Name="txtObrazovanje" Text="{Binding Obrazovanje}" Margin="0,0,0,5"/>
+
+                <TextBlock x:Name="txtBiografija" Text="Biografija:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Biografija}" TextWrapping="Wrap" Margin="0,0,0,5"/>
+
+                <Button Content="Zatvori" Margin="0,20,0,0" Click="Zatvori_Click" 
+                        Style="{StaticResource MaterialDesignOutlinedButton}" HorizontalAlignment="Right"/>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</Window>
