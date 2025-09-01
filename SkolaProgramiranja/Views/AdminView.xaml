@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource MaterialDesignPaper}">
     <Window.Resources>
-        <!-- tvoja osnovna lavanda -->
+        
         <SolidColorBrush x:Key="LavenderBase" Color="#E3DAF4"/>
         
     </Window.Resources>
@@ -45,7 +45,7 @@
                     </StackPanel>
 
                     <!-- Kursevi -->
-                    <TextBlock Text="Kursevi" Opacity="0.75" Margin="0,0,0,6"/>
+                    <TextBlock Text="{DynamicResource ColumnCourses}" Opacity="0.75" Margin="0,0,0,6"/>
                     <StackPanel materialDesign:ButtonAssist.CornerRadius="12">
                         <Button Style="{StaticResource MaterialDesignOutlinedButton}" Click="Dodaj_Click" Margin="0,4">
                             <StackPanel Orientation="Horizontal">
@@ -70,7 +70,7 @@
                     <Separator Margin="0,12"/>
 
                     <!-- Instruktori -->
-                    <TextBlock Text="Instruktori" Opacity="0.75" Margin="0,0,0,6"/>
+                    <TextBlock Text="{DynamicResource ColumnInstructor}" Opacity="0.75" Margin="0,0,0,6"/>
                     <StackPanel materialDesign:ButtonAssist.CornerRadius="12">
                         <Button Style="{StaticResource MaterialDesignOutlinedButton}" Click="DodajInstruktora_Click" Margin="0,4">
                             <StackPanel Orientation="Horizontal">
@@ -89,7 +89,7 @@
                     <Separator Margin="0,12"/>
 
                     <!-- Sistem -->
-                    <TextBlock Text="Sistem" Opacity="0.75" Margin="0,0,0,6"/>
+                    <TextBlock Text="{DynamicResource ColumnSystem}" Opacity="0.75" Margin="0,0,0,6"/>
                     <Button Style="{StaticResource MaterialDesignOutlinedButton}"
                   Click="Odjava_Click"
                   materialDesign:ButtonAssist.CornerRadius="12">

@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Controls.Primitives;
 using System.Text;
+using System.ComponentModel;
+using System.Windows.Data;
 
 
 namespace SkolaProgramiranja.Views
@@ -22,6 +24,7 @@ namespace SkolaProgramiranja.Views
         private bool _isInitializing;
         private List<EvidencijaCasa> _mojeEvidencije = new(); // nikad null
         private List<PlanCasa> _planovi = new();
+        private ICollectionView _planoviView;
         public InstruktorView(Korisnik instruktor)
         {
             InitializeComponent();
@@ -108,7 +111,7 @@ namespace SkolaProgramiranja.Views
             }
         }
 
-        // ========== UČITAJ PODATKE ZA IZABRANI KURS ==========
+        
         private void LoadForCourse(int kursId)
         {
             using (var context = new AppDbContext())
@@ -119,9 +122,24 @@ namespace SkolaProgramiranja.Views
                     .ToList();
             }
 
-            icRaspored.ItemsSource = _planovi;
+            using (var context = new AppDbContext())
+            {
+                _planovi = context.PlanoviCasa
+                    .Where(p => p.KursId == kursId)
+                    .OrderBy(p => p.Datum)
+                    .ToList();
+            }
 
-            // kalendar
+            // ↓ kreiramo “view” s filtrom: prikazuj samo danas i buduće
+            _planoviView = CollectionViewSource.GetDefaultView(_planovi);
+            _planoviView.Filter = o => ((PlanCasa)o).Datum.Date >= DateTime.Today;
+            _planoviView.SortDescriptions.Clear();
+            _planoviView.SortDescriptions.Add(new SortDescription(nameof(PlanCasa.Datum), ListSortDirection.Ascending));
+
+            icRaspored.ItemsSource = _planoviView;
+            _planoviView.Refresh();
+
+            // kalendar – označi samo buduće planove + (po želji) sve evidencije
             calCasovi.SelectedDates.Clear();
 
             var evidencijeKursa = (_mojeEvidencije ?? Enumerable.Empty<EvidencijaCasa>())
@@ -130,18 +148,19 @@ namespace SkolaProgramiranja.Views
                 .ToList();
 
             foreach (var ev in evidencijeKursa)
-                calCasovi.SelectedDates.Add(ev.Datum);
+                calCasovi.SelectedDates.Add(ev.Datum); // evidencije su historija – OK da se vide
 
-            foreach (var p in _planovi ?? Enumerable.Empty<PlanCasa>())
+            foreach (var p in _planovi.Where(p => p.Datum.Date >= DateTime.Today))
                 calCasovi.SelectedDates.Add(p.Datum);
 
             RenderEvidencije(evidencijeKursa);
+
         }
 
-        // ========== HANDLER: PROMJENA KURSA ==========
+        
         private void cbKursevi_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_isInitializing) return; // ignorisi event tokom inicijalizacije
+            if (_isInitializing) return; 
             if (cbKursevi.SelectedItem is not Kurs selektovani) return;
 
             try
@@ -155,42 +174,32 @@ namespace SkolaProgramiranja.Views
             }
         }
 
-        // ========== RENDER EVIDENCIJA (ostaje kao ranije) ==========
-        private void RenderEvidencije(List<EvidencijaCasa> evidencije)
+        // dvoklik na karticu (Border)
+        private void EvidencijaCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            spEvidencije.Children.Clear();
-
-            if (evidencije == null || evidencije.Count == 0)
+            if (e.ClickCount < 2) return;
+            if (sender is Border b && b.Tag is EvidencijaCasa ev)
             {
-                spEvidencije.Children.Add(new TextBlock
-                {
-                    Text = "Nema sačuvanih evidencija.",
-                    Margin = new Thickness(0, 0, 0, 6)
-                });
-                return;
-            }
-
-            foreach (var ev in evidencije)
-            {
-                spEvidencije.Children.Add(new TextBlock
-                {
-                    Text = $"Čas ({ev.Datum:dd.MM.yyyy})",
-                    FontWeight = FontWeights.SemiBold,
-                    Margin = new Thickness(0, 8, 0, 0)
-                });
-                spEvidencije.Children.Add(new TextBlock
-                {
-                    Text = $"Tema: {ev.TemaCasa}",
-                    TextWrapping = TextWrapping.Wrap
-                });
-                spEvidencije.Children.Add(new TextBlock
-                {
-                    Text = $"Prisustvovali: {ev.PrisutniUcenici}",
-                    TextWrapping = TextWrapping.Wrap,
-                    Margin = new Thickness(0, 0, 0, 6)
-                });
+                var win = new EvidencijaCasaView(trenutniInstruktor, ev); 
+                var ok = win.ShowDialog();
+                if (ok == true)
+                    RefreshEvidencijeForCurrentCourse();
             }
         }
+
+        private void RefreshEvidencijeForCurrentCourse()
+        {
+            using (var ctx = new AppDbContext())
+            {
+                _mojeEvidencije = ctx.EvidencijeCasa
+                    .Where(x => x.InstruktorId == trenutniInstruktor.Id)
+                    .OrderByDescending(x => x.Datum)
+                    .ToList();
+            }
+            if (cbKursevi.SelectedItem is Kurs k)
+                LoadForCourse(k.Id);
+        }
+
 
         private void Odjava_Click(object sender, RoutedEventArgs e)
         {
@@ -345,6 +354,8 @@ namespace SkolaProgramiranja.Views
             icRaspored.Items.Refresh();
 
             SpremiPlan_Click(null, null); // automatsko snimanje
+            _planoviView?.Refresh();
+
 
         }
 
@@ -397,6 +408,55 @@ namespace SkolaProgramiranja.Views
                 popup.IsOpen = true;
             }
         }
-        
+
+        private void RenderEvidencije(List<EvidencijaCasa> evidencije)
+        {
+            spEvidencije.Children.Clear();
+
+            if (evidencije == null || evidencije.Count == 0)
+            {
+                spEvidencije.Children.Add(new TextBlock
+                {
+                    Text = "Nema sačuvanih evidencija.",
+                    Margin = new Thickness(0, 0, 0, 6)
+                });
+                return;
+            }
+
+            foreach (var ev in evidencije)
+            {
+                var card = new Border
+                {
+                    CornerRadius = new CornerRadius(12),
+                    Background = (Brush)FindResource("MaterialDesignCardBackground"),
+                    Margin = new Thickness(0, 8, 0, 0),
+                    Padding = new Thickness(10),
+                    Cursor = Cursors.Hand,
+                    Tag = ev
+                };
+                card.MouseLeftButtonDown += EvidencijaCard_MouseLeftButtonDown;
+
+                var panel = new StackPanel();
+                panel.Children.Add(new TextBlock
+                {
+                    Text = $"Čas ({ev.Datum:dd.MM.yyyy})",
+                    FontWeight = FontWeights.SemiBold
+                });
+                panel.Children.Add(new TextBlock
+                {
+                    Text = $"Tema: {ev.TemaCasa}",
+                    TextWrapping = TextWrapping.Wrap
+                });
+                panel.Children.Add(new TextBlock
+                {
+                    Text = $"Prisustvovali: {ev.PrisutniUcenici}",
+                    TextWrapping = TextWrapping.Wrap,
+                    Margin = new Thickness(0, 0, 0, 6)
+                });
+
+                card.Child = panel;
+                spEvidencije.Children.Add(card);
+            }
+        }
     }
 }

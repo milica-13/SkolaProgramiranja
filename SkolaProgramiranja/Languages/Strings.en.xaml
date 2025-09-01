@@ -10,6 +10,8 @@
     <sys:String x:Key="MyCourses">My Courses</sys:String>
     <sys:String x:Key="ClassLog">Class Records</sys:String>
     <sys:String x:Key="ViewLog">Review Class Records</sys:String>
+    <sys:String x:Key="WorkPlan">Work Plan</sys:String>
+    <sys:String x:Key="InstructorProfile">Instructor profile</sys:String>
     
     <!-- Pregled evidencije (InstruktorPregledEvidencijeView) -->
     <sys:String x:Key="Btn_Filtriraj">Filter</sys:String>
@@ -22,6 +24,7 @@
     <sys:String x:Key="WindowTitle_EvidencijaCasova">Class Records</sys:String>
     <sys:String x:Key="Hint_Datum">Date</sys:String>
     <sys:String x:Key="Hint_Kurs">Course</sys:String>
+    
 
     <!-- Poruke u EvidencijaCasaView.cs -->
     <sys:String x:Key="Msg_RequiredFields">Please fill in all required fields.</sys:String>
@@ -86,7 +89,8 @@
     <sys:String x:Key="ColumnName">Name</sys:String>
     <sys:String x:Key="ColumnDescription">Description</sys:String>
     <sys:String x:Key="ColumnInstructor">Instructor</sys:String>
-
+    <sys:String x:Key="ColumnSystem">System</sys:String>
+    
     <sys:String x:Key="CourseAdded">Course successfully added.</sys:String>
     <sys:String x:Key="CourseUpdated">Course successfully updated.</sys:String>
     <sys:String x:Key="CourseDeleted">Course successfully deleted.</sys:String>

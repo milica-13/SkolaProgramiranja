@@ -14,6 +14,8 @@
     <sys:String x:Key="CourseName">Naziv</sys:String>
     <sys:String x:Key="CourseDescription">Opis</sys:String>
     <sys:String x:Key="Theme">Tema</sys:String>
+    <sys:String x:Key="WorkPlan">Plan rada</sys:String>
+    <sys:String x:Key="InstructorProfile">Instruktor profil</sys:String>
 
     <!--Pregled evidencije prevod-->
     <sys:String x:Key="Btn_Filtriraj">Filtriraj</sys:String>
@@ -89,7 +91,9 @@
     <sys:String x:Key="ColumnName">Naziv</sys:String>
     <sys:String x:Key="ColumnDescription">Opis</sys:String>
     <sys:String x:Key="ColumnInstructor">Instruktor</sys:String>
-
+    <sys:String x:Key="ColumnCourses">Kursevi</sys:String>
+    <sys:String x:Key="ColumnSystem">Sistem</sys:String>
+    
     <sys:String x:Key="CourseAdded">Kurs uspješno dodan.</sys:String>
     <sys:String x:Key="CourseUpdated">Kurs uspješno uređen.</sys:String>
     <sys:String x:Key="CourseDeleted">Kurs uspješno obrisan.</sys:String>
