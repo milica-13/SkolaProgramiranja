@@ -13,8 +13,8 @@ Izrađena u **C# / .NET 8 (WPF)** uz **Entity Framework Core** i **SQLite**. Apl
 ### Admin panel — kursevi
 ![Admin panel](./admin-panel.png)
 
-### Instruktor — evidencija časa
-![Evidencija časa](./evidencija-casa.png)
+### Instruktor — pregled rada na engleskom jeziku
+![Evidencija časa](./instruktor-panel.png)
 
 ---
 
