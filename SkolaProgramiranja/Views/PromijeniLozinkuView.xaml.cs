@@ -92,7 +92,6 @@ namespace SkolaProgramiranja.Views
         {
             txtNovaLozinka.Visibility = btnShow.IsChecked == true ? Visibility.Hidden : Visibility.Visible;
 
-            // “Plain” TextBox umjesto PasswordBox
             if (btnShow.IsChecked == true)
             {
                 var tb = new TextBox

@@ -81,19 +81,17 @@ namespace SkolaProgramiranja.Views
                 return;
             }
 
-            // 1) Ako kurs nema upisanih učenika – popuni ga pa nastavi
             var countOnCourse = context.Korisnici
                 .Count(u => u.Uloga == "Ucenik" && u.Kursevi.Any(k => k.Id == odabraniKurs.Id));
 
             if (countOnCourse == 0)
             {
-                // upiši minimalno 15 po kursu (možeš staviti 10, 12…)
+                
                 DbSeeder.EnsureStudentsAndEnrollments(context, minPerCourse: 15);
-                // obavezno osvježi context da bi vidio nove veze
+                
                 context.ChangeTracker.Clear();
             }
 
-            // 2) Učitaj učenike za izabrani kurs
             var ucenici = new AppDbContext().Korisnici
                 .Where(u => u.Uloga == "Ucenik" && u.Kursevi.Any(k => k.Id == odabraniKurs.Id))
                 .Select(u => new UcenikPrisustvo
@@ -108,7 +106,6 @@ namespace SkolaProgramiranja.Views
 
             lstUcenici.ItemsSource = ucenici;
 
-            // Ako uređujemo postojeću evidenciju – prečekiraj prisutne
             if (evidencijaZaUređivanje != null)
             {
                 using var ctx = new AppDbContext();
@@ -136,7 +133,6 @@ namespace SkolaProgramiranja.Views
 
             using (var context = new AppDbContext())
             {
-                // (opcionalno) osiguraj da postoje učenici nakon migracije
                 EnsureStudentsIfEmpty(context);
 
                 kursevi = context.Kursevi
@@ -146,7 +142,7 @@ namespace SkolaProgramiranja.Views
             }
 
             if (kursevi.Count > 0)
-                cbKursevi.SelectedIndex = 0; // okida SelectionChanged
+                cbKursevi.SelectedIndex = 0; 
         }
 
 
@@ -181,14 +177,13 @@ namespace SkolaProgramiranja.Views
                 evidencija.Opis = tbOpis.Text;
                 evidencija.TrajanjeMin = int.TryParse(tbTrajanje.Text, out int t) ? t : 0;
 
-                // string ostavljamo radi kompatibilnosti (nije obavezno)
+                
                 var prisutniImena = (lstUcenici.ItemsSource as IEnumerable<UcenikPrisustvo>)?
                     .Where(x => x.Prisutan).Select(x => x.Ime).ToList() ?? new List<string>();
                 evidencija.PrisutniUcenici = string.Join(", ", prisutniImena);
 
-                context.SaveChanges(); // dobij EvidencijaCasa.Id
+                context.SaveChanges(); 
 
-                // upsert Prisustva
                 var list = (lstUcenici.ItemsSource as IEnumerable<UcenikPrisustvo>)?.ToList() ?? new List<UcenikPrisustvo>();
                 var ids = list.Select(x => x.UcenikId).ToList();
 
@@ -210,7 +205,7 @@ namespace SkolaProgramiranja.Views
                     }
                     else
                     {
-                        post.Prisutan = x.Prisutan; // update
+                        post.Prisutan = x.Prisutan; 
                     }
                 }
 
@@ -261,7 +256,6 @@ namespace SkolaProgramiranja.Views
                                $"Tema časa: {tbTema.Text}\n" +
                                $"Trajanje: {tbTrajanje.Text} minuta\n" +
                                $"Opis: {tbOpis.Text}\n";
-                               //$"Prisutni učenici: {tbPrisutni.Text}";
 
                 System.IO.File.WriteAllText(saveDialog.FileName, tekst);
                 MessageBox.Show((string)Application.Current.Resources["Msg_ExportSuccess"]);
@@ -307,11 +301,10 @@ namespace SkolaProgramiranja.Views
                     Lozinka = "test123",
                     Uloga = "Ucenik",
                     MoraPromijenitiLozinku = false,
-                    Kursevi = new List<Kurs>() // popuni ispod
+                    Kursevi = new List<Kurs>() 
                 });
             }
 
-            // raspodijeli učenike po postojećim kursevima (ako ih ima)
             var kursevi = context.Kursevi.ToList();
             if (kursevi.Count > 0)
             {

@@ -89,36 +89,13 @@ namespace SkolaProgramiranja.Views
                 if (!File.Exists(destinationPath))
                     File.Copy(dlg.FileName, destinationPath);
 
-                // Prikaži sliku odmah
                 var bitmap = new BitmapImage(new Uri(destinationPath, UriKind.Absolute));
                 imgProfilna.Source = bitmap;
 
-                // Sačuvaj relativnu putanju u instruktor objektu
                 instruktor.SlikaProfilaPath = $@"Resources\ProfilneSlike\{fileName}";
             }
         }
 
 
-        /*
-        private void OdaberiSliku_Click(object sender, RoutedEventArgs e)
-        {
-             var dlg = new Microsoft.Win32.OpenFileDialog
-             {
-                   Title = "Odaberi profilnu sliku",   
-                   Filter = "Slike (*.png; *.jpg) | *.png; *.jpg| Svi fajlovi (*.*)| *.*"
-             };
-
-              if(dlg.ShowDialog() == true)
-              {
-                   var img = new BitmapImage(new Uri(dlg.FileName));
-                   imgProfilna.Source = img;
-
-                   instruktor.SlikaProfilaPath = dlg.FileName; 
-              }
-
-
-
-        } 
-        */
     }
 }

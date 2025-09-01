@@ -13,7 +13,6 @@ namespace SkolaProgramiranja.Models
         {
             using var context = new AppDbContext();
 
-            // Ako već ima učenika, ne radi ništa
             if (context.Korisnici.Any(k => k.Uloga == "Ucenik"))
                 return;
 
@@ -47,7 +46,7 @@ namespace SkolaProgramiranja.Models
                     Ime = ime,
                     Prezime = prezime,
                     Email = email,
-                    Lozinka = "test123",     // stavi hash ako koristiš hashiranje
+                    Lozinka = "test123",     
                     Uloga = "Ucenik",
                     MoraPromijenitiLozinku = false
                 });
@@ -56,7 +55,6 @@ namespace SkolaProgramiranja.Models
             context.Korisnici.AddRange(novi);
             context.SaveChanges();
 
-            // (Opcionalno) raspodijeli učenike po postojećim kursevima – ravnomjerno
             var sviKursevi = context.Kursevi.ToList();
             if (sviKursevi.Count > 0)
             {
@@ -66,12 +64,12 @@ namespace SkolaProgramiranja.Models
                 foreach (var u in ucenici)
                 {
                     var kurs = sviKursevi[idx % sviKursevi.Count];
-                    // osiguraj da kolekcije postoje
+                    
                     u.Kursevi ??= new List<Kurs>();
                     kurs.Polaznici ??= new List<Korisnik>();
 
                     u.Kursevi.Add(kurs);
-                    // kurs.Polaznici.Add(u); // nije nužno dodavati na obje strane, EF će povezati
+                    
                     idx++;
                 }
 
@@ -79,7 +77,7 @@ namespace SkolaProgramiranja.Models
             }
         }
 
-        // Pojednostavljena transliteracija za email (bez dijakritika)
+        
         private static string Transliterate(string s)
         {
             return s
@@ -91,16 +89,16 @@ namespace SkolaProgramiranja.Models
 
         public static void EnsureStudentsAndEnrollments(AppDbContext context, int minPerCourse = 15)
         {
-            // 1) ako nema dovoljno učenika uopšte – generiši
+            
             EnsureStudentsIfEmpty(context, totalTarget: Math.Max(50, context.Kursevi.Count() * minPerCourse));
 
-            // 2) upiši na kurseve tako da svaki ima bar minPerCourse (ne dodaje duplikate)
+           
             var kursevi = context.Kursevi.ToList();
             var ucenici = context.Korisnici.Where(k => k.Uloga == "Ucenik").ToList();
 
             foreach (var kurs in kursevi)
             {
-                // trenutni broj
+                
                 var count = context.Entry(kurs)
                     .Collection(k => k.Polaznici)
                     .Query()
@@ -109,7 +107,7 @@ namespace SkolaProgramiranja.Models
 
                 if (count >= minPerCourse) continue;
 
-                // izaberi učenike koji još NISU na ovom kursu
+                
                 var need = minPerCourse - count;
                 var candidates = ucenici
                     .Where(u => !context.Entry(u).Collection(x => x.Kursevi).Query().Any(k => k.Id == kurs.Id))

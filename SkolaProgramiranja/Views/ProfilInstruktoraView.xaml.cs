@@ -54,18 +54,13 @@ namespace SkolaProgramiranja.Views
                 string fileName = System.IO.Path.GetFileName(dlg.FileName);
                 string destPath = System.IO.Path.Combine(destFolder, fileName);
 
-                //string destFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
                 if (!Directory.Exists(destFolder))
                     Directory.CreateDirectory(destFolder);
 
-                //string fileName = System.IO.Path.GetFileName(dlg.FileName);
-                //string destPath = Path.Combine(destFolder, fileName);
-
-                // Kopiraj sliku u lokalni folder ako već ne postoji
                 if (!File.Exists(destPath))
                     File.Copy(dlg.FileName, destPath);
 
-                // Sačuvaj relativnu putanju
+              
                 instruktor.SlikaProfilaPath = $"/Resources/{fileName}";
 
             }

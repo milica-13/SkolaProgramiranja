@@ -19,10 +19,8 @@ namespace SkolaProgramiranja.Views
     {
         private readonly Korisnik trenutniInstruktor;
         private readonly PaletteHelper _paletteHelper = new PaletteHelper();
-        //private List<EvidencijaCasa> _mojeEvidencije;
-        //private List<PlanCasa> _planovi = new List<PlanCasa>();
         private bool _isInitializing;
-        private List<EvidencijaCasa> _mojeEvidencije = new(); // nikad null
+        private List<EvidencijaCasa> _mojeEvidencije = new(); 
         private List<PlanCasa> _planovi = new();
         private ICollectionView _planoviView;
         public InstruktorView(Korisnik instruktor)
@@ -72,25 +70,21 @@ namespace SkolaProgramiranja.Views
             {
                 using (var context = new AppDbContext())
                 {
-                    // 1) Kursevi instruktora
                     var kursevi = context.Kursevi
                         .Where(k => k.InstruktorId == trenutniInstruktor.Id)
                         .OrderBy(k => k.Naziv)
                         .ToList();
 
-                    // 2) Evidencije instruktora (sve)
                     _mojeEvidencije = context.EvidencijeCasa
                         .Where(e => e.InstruktorId == trenutniInstruktor.Id)
                         .OrderByDescending(e => e.Datum)
                         .ToList();
 
-                    // 3) Postavi combo bez trigera eventa
                     cbKursevi.SelectionChanged -= cbKursevi_SelectionChanged;
                     cbKursevi.ItemsSource = kursevi;
                     cbKursevi.SelectedIndex = kursevi.Count > 0 ? 0 : -1;
                     cbKursevi.SelectionChanged += cbKursevi_SelectionChanged;
 
-                    // 4) Osvježi UI za prvi kurs (bez oslanjanja na event)
                     calCasovi.SelectedDates.Clear();
 
                     if (kursevi.Count > 0)
@@ -130,7 +124,6 @@ namespace SkolaProgramiranja.Views
                     .ToList();
             }
 
-            // ↓ kreiramo “view” s filtrom: prikazuj samo danas i buduće
             _planoviView = CollectionViewSource.GetDefaultView(_planovi);
             _planoviView.Filter = o => ((PlanCasa)o).Datum.Date >= DateTime.Today;
             _planoviView.SortDescriptions.Clear();
@@ -139,7 +132,6 @@ namespace SkolaProgramiranja.Views
             icRaspored.ItemsSource = _planoviView;
             _planoviView.Refresh();
 
-            // kalendar – označi samo buduće planove + (po želji) sve evidencije
             calCasovi.SelectedDates.Clear();
 
             var evidencijeKursa = (_mojeEvidencije ?? Enumerable.Empty<EvidencijaCasa>())
@@ -174,7 +166,6 @@ namespace SkolaProgramiranja.Views
             }
         }
 
-        // dvoklik na karticu (Border)
         private void EvidencijaCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount < 2) return;
@@ -322,21 +313,14 @@ namespace SkolaProgramiranja.Views
 
         private void DodajPlan_Click(object sender, RoutedEventArgs e)
         {
-            // sljedeći slobodni datum = max(datum) + 7d (ili danas ako nema nijedan)
+            
             DateTime nextDate;
             if (_planovi.Count > 0)
                 nextDate = _planovi.Max(p => p.Datum).AddDays(7);
             else
                 nextDate = DateTime.Today;
 
-            /*var novi = new PlanCasa
-            {
-                KursId = ((Kurs)dgMojiKursevi.Items[0]).Id,
-                Datum = nextDate,
-                Tema = "(tema)"
-            };
-            */
-            // trenutni izabrani kurs
+           
             var kurs = cbKursevi.SelectedItem as Kurs;
             if (kurs == null) return;
 
@@ -348,12 +332,10 @@ namespace SkolaProgramiranja.Views
             };
 
 
-            //_planovi.Add(novi);
-            //icRaspored.Items.Refresh();
             _planovi.Add(novi);
             icRaspored.Items.Refresh();
 
-            SpremiPlan_Click(null, null); // automatsko snimanje
+            SpremiPlan_Click(null, null); 
             _planoviView?.Refresh();
 
 
@@ -363,11 +345,10 @@ namespace SkolaProgramiranja.Views
 
         private void SpremiPlan_Click(object sender, RoutedEventArgs e)
         {
-            // snimi sve izmjene
+          
             using var ctx = new AppDbContext();
             foreach (var p in _planovi)
             {
-                // upsert
                 var postojeci = ctx.PlanoviCasa
                                   .FirstOrDefault(x => x.Id == p.Id);
 
@@ -394,7 +375,6 @@ namespace SkolaProgramiranja.Views
 
         private void tbDatum_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            // Pronađi popup koji je u istom DataTemplate-u
             var tb = sender as TextBox;
             if (tb == null) return;
 

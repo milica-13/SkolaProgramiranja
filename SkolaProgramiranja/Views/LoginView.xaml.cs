@@ -21,15 +21,13 @@ namespace SkolaProgramiranja.Views
         public LoginView()
         {
             InitializeComponent();
-            // Enter = Login
+            
             this.Tag = new RoutedCommand();
             this.CommandBindings.Add(
                 new CommandBinding((RoutedCommand)this.Tag, (s, e) => Login_Click(s, null)));
 
             ThemeHelper.ApplyTheme(this);
-            //CommandBindings.Add(new CommandBinding(ApplicationCommands.Properties, (s, e) => Login_Click(s, null)));
-
-            //DatabaseSeeder.Seed();
+            
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
@@ -51,7 +49,7 @@ namespace SkolaProgramiranja.Views
             {
                 using (var context = new AppDbContext())
                 {
-                    // za svaki slučaj — ako nema podataka generiši seed
+                    
                     DatabaseSeeder.Seed();
 
                     var korisnik = context.Korisnici
@@ -59,7 +57,7 @@ namespace SkolaProgramiranja.Views
 
                     if (korisnik != null)
                     {
-                        // prijava uspješna
+                        
                         switch (korisnik.Uloga)
                         {
                             case "Admin":
@@ -117,7 +115,6 @@ namespace SkolaProgramiranja.Views
 
             if (_passwordVisible)
             {
-                // Prikaži lozinku (kopiraj iz PasswordBox u TextBox)
                 tbLozinka.Text = txtLozinka.Password;
                 txtLozinka.Visibility = Visibility.Collapsed;
                 tbLozinka.Visibility = Visibility.Visible;
@@ -125,7 +122,6 @@ namespace SkolaProgramiranja.Views
             }
             else
             {
-                // Vrati se u PasswordBox
                 txtLozinka.Password = tbLozinka.Text;
                 tbLozinka.Visibility = Visibility.Collapsed;
                 txtLozinka.Visibility = Visibility.Visible;

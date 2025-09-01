@@ -46,9 +46,6 @@ namespace SkolaProgramiranja.Views
         private void Nazad_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            //var forma = new AdminView();
-            //forma.ShowDialog();
-            
         }
 
         private void Detalji_Click(object sender, RoutedEventArgs e)
@@ -61,16 +58,7 @@ namespace SkolaProgramiranja.Views
                 var forma = new PrikazInstruktoraProfilView(selektovani);
                 forma.ShowDialog();
             }
-            /*
-            var button = sender as Button;
-            var instruktor = button?.DataContext as Korisnik;
-
-            if (instruktor != null)
-            {
-                var view = new ProfilInstruktoraView(instruktor);
-                view.ShowDialog();
-            }
-            */
+            
         }
 
     }

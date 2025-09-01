@@ -9,7 +9,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <!-- BOJE -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Purple.xaml" />
-                <!-- Tema -->
+                
                 <materialDesign:BundledTheme BaseTheme="Light"
                                      PrimaryColor="DeepPurple"
                                      SecondaryColor="DeepPurple" />

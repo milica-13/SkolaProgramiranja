@@ -20,6 +20,6 @@ namespace SkolaProgramiranja.Models
         public int TrajanjeMin { get; set; }
 
         public virtual Korisnik Instruktor { get; set; }
-        public virtual Kurs Kurs { get; set; } // Navigaciona svojstva
+        public virtual Kurs Kurs { get; set; } 
     }
 }

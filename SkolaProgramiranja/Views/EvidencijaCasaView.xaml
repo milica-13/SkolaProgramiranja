@@ -55,16 +55,7 @@
                              Height="100"
                              VerticalScrollBarVisibility="Auto"
                              Margin="0,0,0,16"/>
-<!--
-                    <TextBox x:Name="tbPrisutni"
-                             materialDesign:HintAssist.Hint="{DynamicResource Hint_PrisutniUcenici}"
-                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                             AcceptsReturn="True"
-                             TextWrapping="Wrap"
-                             Height="100"
-                             VerticalScrollBarVisibility="Auto"
-                             Margin="0,0,0,16"/>
--->
+
                     <StackPanel Orientation="Horizontal" Margin="0,8,0,6">
                         <TextBlock Text="{DynamicResource Hint_PrisutniUcenici}" Margin="0,0,10,0" />
                         <CheckBox x:Name="cbSelectAll"

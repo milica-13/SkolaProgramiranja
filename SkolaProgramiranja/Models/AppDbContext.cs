@@ -22,23 +22,17 @@ namespace SkolaProgramiranja.Models
             optionsBuilder.UseSqlite(connectionString);
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //  optionsBuilder.UseSqlite("Data Source=skola.db");
-        //}
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Kurs.Instruktor 1:N
             modelBuilder.Entity<Kurs>()
                 .HasOne(k => k.Instruktor)
                 .WithMany()
                 .HasForeignKey(k => k.InstruktorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Korisnik-Kurs N:N (join: KorisnikKurs)
             modelBuilder.Entity<Korisnik>()
                 .HasMany(k => k.Kursevi)
                 .WithMany(k => k.Polaznici)
@@ -48,7 +42,7 @@ namespace SkolaProgramiranja.Models
                     j => j.HasOne<Korisnik>().WithMany().HasForeignKey("KorisniciId"),
                     j => { j.ToTable("KorisnikKurs"); j.HasKey("KorisniciId", "KurseviId"); });
 
-            // Prisustvo: jedinstveno po (EvidencijaCasaId, UcenikId)
+            
             modelBuilder.Entity<Prisustvo>()
                 .HasIndex(p => new { p.EvidencijaCasaId, p.UcenikId })
                 .IsUnique();

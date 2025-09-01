@@ -43,7 +43,7 @@ namespace SkolaProgramiranja.Models
                     context.SaveChanges();
 
                     var instruktorIzBaza = context.Korisnici.FirstOrDefault(k => k.Email == "instruktor@skola.com");
-                    //Dodavanje kursa koji vodi instruktor
+                    
                     if(instruktorIzBaza != null)
                     {
                         context.Kursevi.Add(new Kurs

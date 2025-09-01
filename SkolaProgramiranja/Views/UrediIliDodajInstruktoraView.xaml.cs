@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace SkolaProgramiranja.Views
 {
-    /// <summary>
-    /// Interaction logic for DodajInstruktoraView.xaml
-    /// </summary>
     public partial class UrediIliDodajInstruktoraView : Window
     {
         public UrediIliDodajInstruktoraView()
@@ -80,7 +77,6 @@ namespace SkolaProgramiranja.Views
 
             if (_passwordVisible)
             {
-                // Prikaži lozinku (kopiraj iz PasswordBox u TextBox)
                 tbLozinka.Text = txtLozinka.Password;
                 txtLozinka.Visibility = Visibility.Collapsed;
                 tbLozinka.Visibility = Visibility.Visible;
@@ -88,7 +84,6 @@ namespace SkolaProgramiranja.Views
             }
             else
             {
-                // Vrati se u PasswordBox
                 txtLozinka.Password = tbLozinka.Text;
                 tbLozinka.Visibility = Visibility.Collapsed;
                 txtLozinka.Visibility = Visibility.Visible;

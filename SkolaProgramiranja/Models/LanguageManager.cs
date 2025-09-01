@@ -23,8 +23,6 @@ namespace SkolaProgramiranja.Models
                     dict.Source = new System.Uri("Languages/Strings.sr.xaml", UriKind.Relative);
                     break;
             }
-
-            // Pronađi i zamijeni postojeći jezički rječnik bez brisanja ostalih
             var existingLangDict = Application.Current.Resources.MergedDictionaries
                 .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.StartsWith("Languages/Strings"));
 

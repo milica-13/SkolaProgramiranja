@@ -52,7 +52,6 @@ namespace SkolaProgramiranja.Views
                     e.PrisutniUcenici = string.Join(", ", prisLista);
                 }
 
-                // VAŽNO: očisti Items prije ItemsSource
                 dgEvidencije.ItemsSource = null;
                 dgEvidencije.Items.Clear();
 
@@ -78,7 +77,7 @@ namespace SkolaProgramiranja.Views
 
             var lista = filtrirane.ToList();
 
-            // očisti prije nove dodjele
+            
             dgEvidencije.ItemsSource = null;
             dgEvidencije.Items.Clear();
 
