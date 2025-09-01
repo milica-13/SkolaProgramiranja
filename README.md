@@ -1,18 +1,20 @@
 # SkolaProgramiranja
 
 Desktop aplikacija za upravljanje školom programiranja: kursevima, instruktorima, planovima časova i evidencijom prisustva.  
-Izgrađena u **C# / .NET 8 (WPF)** uz **Entity Framework Core** i **SQLite**. Aplikacija podržava **teme (Light/Dark/Purple)** i **dvojezičnost (SR/EN)**.
+Izrađena u **C# / .NET 8 (WPF)** uz **Entity Framework Core** i **SQLite**. Aplikacija podržava **teme (Light/Dark/Purple)** i **dvojezičnost (SR/EN)**.
 
 ---
 
-- Početni ekran / Prijava  
-  `login.png`
-- Admin panel — kursevi  
-  `![Admin panel](admin-panel.png)`
-- Instruktor — evidencija časa  
-  `![Evidencija časa](evidencija-casa.png)`
-- Tema i jezik  
-  `![Teme i jezik](theme-language.png)`
+## Pregled ekrana
+
+### Početni ekran / Prijava
+![Login ekran](./login.png)
+
+### Admin panel — kursevi
+![Admin panel](./admin-panel.png)
+
+### Instruktor — evidencija časa
+![Evidencija časa](./evidencija-casa.png)
 
 ---
 
@@ -48,10 +50,8 @@ Izgrađena u **C# / .NET 8 (WPF)** uz **Entity Framework Core** i **SQLite**. Ap
   - `PlanCasa`: unikatno **(KursId, Datum)**.
   - `Kurs.InstruktorId` → FK ka `Korisnik(Id)` (restrikt brisanje).
 
-> **TODO (slika šeme baze):** eksportuj dijagram i sačuvaj kao `docs/schema.png`, pa aktiviraj liniju ispod:  
-`![Šema baze](docs/schema.png)`
+![Šema baze](./skola_programiranja.png)
 
-> (Opciono) **SQL skripta**: ako želiš, sačuvaj i u `docs/sql/schema.sql`.
 
 ---
 
