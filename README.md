@@ -6,7 +6,7 @@ Izgrađena u **C# / .NET 8 (WPF)** uz **Entity Framework Core** i **SQLite**. Ap
 ---
 
 - Početni ekran / Prijava  
-  `![Prijava](login.png)`
+  `login.png`
 - Admin panel — kursevi  
   `![Admin panel](admin-panel.png)`
 - Instruktor — evidencija časa  
