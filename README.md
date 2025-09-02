@@ -1,167 +1,151 @@
-# Škola Programiranja
+# Škola programiranja – Korisničko uputstvo
 
-Desktop aplikacija za upravljanje školom programiranja: kursevima, instruktorima, planovima časova i evidencijom prisustva.  
-Izrađena u **C# / .NET 8 (WPF)** uz **Entity Framework Core** i **SQLite**. Aplikacija podržava **teme (Light/Dark/Purple)** i **dvojezičnost (SR/EN)**.
+## 1.0 Prijava u sistem
 
----
+![pocetni_ekran](slike/pocetni-ekran.png)
+*Slika 1.1 – početni ekran*  
+![Login](slike/login.png)
 
-## Pregled ekrana
+*Slika 1.2 – prijava u sistem*
 
-### Početni ekran / Prijava
-![Login ekran](./login.png)
+### 1.1 Otvorite aplikaciju
+Kada pokrenete aplikaciju, prikazaće vam se početna stranica na kojoj se nalazi:  
+- Dugme **Prijavi se**  
+- Dugme za odabir jezika (srpski/engleski)
 
-### Admin panel — kursevi
-![Admin panel](./admin-panel.png)
+### 1.2 Forma za prijavu
+Klikom na dugme **Prijavi se** otvara se forma koja sadrži dva polja:  
+- **Email** – jedinstvena adresa (ime@skola.com)  
+- **Lozinka** – sigurnosni ključ za pristup nalogu  
+Savjet: koristite *Prikaži lozinku* da provjerite unos prije slanja.
 
-### Instruktor — pregled rada 
-![Evidencija časa](./instruktor-panel.png)
+### 1.3 Prijava u sistem
+Nakon unosa podataka kliknite **Prijavi se** (ili Enter).
 
----
-
-##  Funkcionalnosti
-
-###  Administrator
-- **CRUD**: kursevi, instruktori, planovi časova, evidencije časova, prisustva.
-- **Upis učenika na kurs** (N:N Korisnik–Kurs).
-- **Pretraga** po nazivu kursa i/ili instruktoru.
-- **Dvoklik** na red u tabeli otvara formu za **uređivanje**.
-- **Tema** (Light/Dark/Purple) i **jezik** (SR/EN) iz UI.
-- **Odjava**.
-
-###  Instruktor
-- Pregled sopstvenih kurseva i **plana rada** (datum/tema).
-- Vođenje **evidencije časa**: tema, opis, prisutni učenici, trajanje.
-- Brza promjena **teme** i **jezika**.
-- **Obavezna promjena lozinke** pri prvoj prijavi.
-
-### Zajedničko
-- Material Design stilovi (moderni WPF UI).
-- Snackbar poruke (uspjeh/greška), hover/selekt stilovi, jasna navigacija.
+### 1.4 Provjera podataka
+- Ako su podaci tačni → ulazite na glavni ekran.  
+- Ako nisu → prikazuje se poruka “Neispravan email ili lozinka”.
 
 ---
 
-##  Baza podataka
+## 2.0 Uputstvo za korištenje sistema – Administrator
 
-- **EF Core + SQLite** (Code-First).
-- Entiteti:  
-  `Korisnik`, `Kurs`, `PlanCasa`, `EvidencijaCasa`, `Prisustvo` i veza M:N `KorisnikKurs`.
-- Ograničenja:
-  - `Prisustvo`: unikatno **(EvidencijaCasaId, UcenikId)**.
-  - `PlanCasa`: unikatno **(KursId, Datum)**.
-  - `Kurs.InstruktorId` → FK ka `Korisnik(Id)` (restrikt brisanje).
+![admin](slike/admin-panel.png)
+*Slika 2.0 – administrator interfejs*
 
-![Šema baze](./skola_programiranja.png)
+Kada se prijavite kao administrator, otvara se forma sa navigacijom (Dodaj kurs, Uredi kurs, Obriši kurs, Dodaj/Pregledaj instruktora, Odjava).
 
+### Glavne funkcionalnosti administratora
 
----
+#### 2.1 Pregled i pretraga kurseva
+- Tabela (ID, Naziv, Opis, Instruktor)  
+- Pretraga po kursu ili instruktoru  
+- Sortiranje po kolonama  
+- Dvoklik na red → otvara **Uredi kurs**
 
-## Tehnologije
+#### 2.2 CRUD nad kursevima
+- **Dodaj kurs** – forma sa obaveznim poljima  
+- **Uredi kurs** – izmjena postojećeg zapisa  
+- **Obriši kurs** – uz potvrdu  
+- Validacija: ne dozvoljava prazna polja
 
-- **.NET 8 / WPF**
-- **Entity Framework Core** + **Microsoft.Data.Sqlite (SQLite)**
-- **MaterialDesignInXaml** (UI stilovi)
-- Visual Studio 2022 / EF Core Tools
+#### 2.3 Upravljanje instruktorom
+- Dodavanje instruktora (ime, prezime, email, lozinka)  
+- Pregled instruktora (ko vodi koje kurseve)  
+- Povezivanje kursa i instruktora u formi kursa
 
----
+#### 2.4 Korisničko iskustvo i navigacija
+- Lijevi meni – kursevi, instruktori, sistem  
+- Desni panel – lista kurseva + pretraga  
+- Obavještenja preko snackbar-a
 
-### Korisničko uputstvo
+#### 2.5 Tema i jezik
+- **Tema**: Light / Dark / Purple  
+- **Jezik**: SR / EN
 
+#### 2.6 Odjava i sigurnost
+- Odjava → povratak na login ekran  
+- Admin panel dostupan samo korisnicima sa rolom *Admin*
 
-### 1) Početak i prijava
+## Prikaz interfejsa - *Admin*
 
-1. Pokreni aplikaciju.  
-   ![Početni ekran / Prijava](./login.png)
-2. Unesi **email** i **lozinku**, pa klikni **Prijavi se**.
-3. Ako je lozinka pogrešna ili nalog ne postoji, aplikacija prikazuje jasnu poruku o grešci.
-4. **Prva prijava**: ako je za nalog postavljeno *MoraPromijenitiLozinku = true*, bićeš preusmjeren(a) na formu za promjenu lozinke prije nastavka rada.
+![dodavanje-instruktora](slike/dodavanje-instruktora.png)
+*Slika 2.1 – dodavanje instruktora*
 
----
+![dodavanje-kursa](slike/dodavanje-kursa.png)
+*Slika 2.2 – dodavanje kursa*
 
-### 2) Uloge i pristup
+![brisanje-kursa](slike/brisanje-kursa.png)
+*Slika 2.3 – brisanje kursa*
 
-- **Administrator**
-  - Upravljanje **kursevima**, **instruktorima** i **upisima polaznika** (M:N Korisnik–Kurs).
-  - Pretraga/sortiranje, uređivanje i brisanje zapisa.
-  - Promjena **teme** (Light/Dark/Purple) i **jezika** (SR/EN).
-  - Odjava sa sistema.
+![pregled-instruktora](slike/pregeld-instruktora.png)
+*Slika 2.4 – pregled instruktora*
 
-- **Instruktor**
-  - Pregled sopstvenih **kurseva**.
-  - Rad sa **planom časova** (datum/tema).
-  - Vođenje i izmjena **evidencija časova** (tema, opis, prisutni, trajanje).
-  - Brza promjena **teme** i **jezika**.
-  - Obavezna promjena lozinke pri prvoj prijavi.
-
----
-
-### 3) Administrator — rad sa kursevima
-
-![Admin panel](./admin-panel.png)
-
-- **Tabela**: ID, Naziv, Opis, Instruktor.
-- **Pretraga**: unos ključnih riječi (naziv kursa ili instruktor).
-- **Sortiranje**: klik na zaglavlje kolone.
-- **CRUD**:
-  - **Dodaj** novi kurs (dugme *Dodaj*).
-  - **Uredi** postojeći kurs (dugme *Uredi* ili **dvoklik** na red).
-  - **Obriši** kurs (uz potvrdu).
-- **Upis polaznika**: dodavanje/uklanjanje korisnika na kurs (veza Korisnik–Kurs).
-- **Dvoklik** na red u tabeli otvara formu za **uređivanje kursa**.
-
+![petraga](slike/pretraga-instruktor.png)
+*Slika 2.5 – pretraga instruktora*
 
 ---
 
-### 4) Instruktor — plan rada i evidencija časova
+## 3.0 Uputstvo za korištenje sistema – Instruktor
 
-![Instruktor panel / evidencija](./instruktor-panel.png)
+![instruktor](slike/instruktor-panel.png)
+**Slika 3.0 – instruktor interfejs**
 
-#### 4.1 Izbor kursa
-- U vrhu prozora nalazi se **ComboBox** za odabir kursa.
-- Izbor kursa filtrira **kalendar**, **plan rada** i **evidencije**.
+Instruktor ima pristup samo sopstvenim kursevima (plan rada, evidencije).  
+Administratorske opcije nisu dostupne.
 
-#### 4.2 Kalendar
-- Označeni su termini iz **plana rada** i datumi sačuvanih **evidencija časova**.
+### Glavne funkcionalnosti instruktora
 
-#### 4.3 Plan rada
-- Svaka stavka sadrži **datum** i **temu** časa.
-- Polje **Tema** je uređivo; čuvanje preko ikone **diskete**.
-- **Dodaj plan** dodaje novi termin (prečica **Ctrl+N** predlaže naredni logičan datum).
+#### 3.1 Pregled i izbor kurseva
+- Izbor kursa preko ComboBox-a  
+- Filtrira kalendar, plan rada i evidencije
 
-#### 4.4 Evidencija časa
-- Unos/izmjena: **Tema časa**, **Opis**, **Prisutni učenici** (lista/tekst), **Trajanje (min)**.
-- Lista evidencija je sortirana od najnovije ka starijoj.
-- **Dvoklik** na stavku evidencije otvara formu **EvidencijaCasaView** za uređivanje.
+#### 3.2 Kalendar časova
+- Prikazuje termine iz plana rada i evidencije  
+- Vizuelno označava datume
+
+#### 3.3 Plan rada
+- Svaka stavka = datum + tema  
+- Klik na disketu → snimanje  
+- Dodavanje novog plana (Ctrl+N)
+
+#### 3.4 Evidencija časova
+- Tema časa + prisutni učenici  
+- Hronološki prikaz (najnovije na vrhu)
+
+#### 3.5 Profil i lozinka
+- Pri prvoj prijavi → obavezna promjena lozinke  
+- Kasnije moguće uređivanje profila i lozinke
+
+#### 3.6 Tema i jezik
+- Promjena teme i jezika dostupna odmah
+
+#### 3.7 Ograničenja
+- Instruktor ne može dodavati/brisati globalne kurseve ili instruktore  
+- Ima pristup samo svojim kursevima
+
+#### 3.8 Odjava
+- Dugme **Odjava** → povratak na login ekran
+
+
+## Prikaz interfejsa - *Instruktor*
+
+![kreiraj-evidenciju](slike/kreiraj-evidenciju.png)
+*Slika 3.1 – kreiraj evidenciju*
+
+![evidencija-casa](slike/evidencija-casa.png)
+*Slika 3.2 – evidencija casa*
+
+![uredi-profil](slike/uredi-profil.png)
+
+*Slika 3.3 – uređivanje profila*
+
+![profil-instruktora](slike/profil-instruktora.png)
+
+*Slika 3.4 – prikaz profil instruktora*
+
+![lozinka](slike/promjena-lozinke.png)
+
+*Slika 3.5 – promjena lozinke*
 
 ---
-
-### 5) Tema i jezik
-
-- **Tema**: **Light / Dark / Purple** (primjenjuje se na cijeli UI).
-- **Jezik**: **SR / EN**.
-- Aplikacija pamti posljednji izbor i automatski ga primjenjuje pri sljedećem pokretanju.
-
----
-
-### 6) Odjava
-
-- Klikom na **Odjava** aplikacija se vraća na ekran za prijavu.
-
----
-
-### Kratke prečice (Keyboard Shortcuts)
-
-- **Ctrl + N** — dodaj novu stavku u **planu rada** (instruktor).
-- **Enter** — potvrdi dijalog gdje je primjenjivo (npr. čuvanje).
-- **Esc** — zatvori/otkaži trenutni dijalog.
-
----
-
-### Preduslovi
-- **.NET SDK 8**
-- **Visual Studio 2022** (Desktop development with .NET)
-
-### 1) Kloniraj repo
-```bash
-git clone https://github.com/<tvoj-username>/SkolaProgramiranja.git
-cd SkolaProgramiranja
-
